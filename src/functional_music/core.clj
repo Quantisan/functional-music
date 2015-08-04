@@ -1,12 +1,10 @@
-(ns ohack.core
-  (:use [overtone.live]
-        [overtone.inst.piano]
-        [overtone.inst.sampled-piano]
-        [overtone.synth.stringed])
-  (:require [overtone.inst.synth :as synth]
-            [clojure.string :as s]
-            [quil.core :as q]
-            ))
+(ns functional-music.core
+  (:requre [overtone.live :refer :all]
+           [overtone.inst.sampled-piano :refer :all]
+           [overtone.synth.stringed :refer :all]
+
+           [overtone.inst.synth :as synth]
+           [clojure.string :as s]))
 
 ;; run M-x cider-jack-in to get started
 ;;
