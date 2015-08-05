@@ -21,18 +21,19 @@
    string-index-2 fret-index-2 ... ]]
    "
   [interval noteseq]
-  (let [playguitar (partial guitar-pick (guitar))
-        timeseq    (range (now) (+ (now) (* interval (count noteseq))) interval)]
+  (let [timeseq  (range (now) (+ (now) (* interval (count noteseq))) interval)]
     (doseq [[string-fret-seq timeval] (map vector noteseq timeseq)]
       (doseq [[string fret] string-fret-seq]
-        (playguitar string fret timeval)))))
+        (guitar-pick (guitar) string fret timeval)))))
 
 (def playguitar320
   (partial guitar-pick-note-sequence 320))  ;; 320ms delay between picked strings
 
 ;; now we can play multiple notes at the same time
 (comment
-  (playguitar320 [[[0 3] [3 0] [4 0] [5 3]]]))
+  (playguitar320 [[[0 3] [3 0] [4 0] [5 3]]])
+  (playguitar320 [[[0 3] [3 0]]
+                  [[4 0] [5 3]]]))
 
 
 
