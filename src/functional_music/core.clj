@@ -31,16 +31,14 @@
   (partial guitar-pick-note-sequence 320))  ;; 320ms delay between picked strings
 
 (def everybody-hurts
- "
-  ;; Guitar Tab for Everybody Hurts by REM
-  ;;
-  ;;       D                        G
-  ;; E:5]--------2-----------2------------3-----------3-----[
-  ;; B:4]------3---2-------3---3--------0---0-------0---0---[
-  ;; G:3]----2-------2---2-------2----0-------0---0-------0-[
-  ;; D:2]--0-----------0------------------------------------[
-  ;; A:1]---------------------------------------------------[
-  ;; E:0]---------------------------3-----------3-----------[
+"
+Guitar Tab for Everybody Hurts by REM
+e|--------2-----------2------------3-----------3-----|
+B|------3---2-------3---3--------0---0-------0---0---|
+G|----2-------2---2-------2----0-------0---0-------0-|
+D|--0-----------0------------------------------------|
+A|---------------------------------------------------|
+E|---------------------------3-----------3-----------|
 ")
 
 ;; now we can play multiple notes at the same time
@@ -48,10 +46,11 @@
   (playguitar320 [[0 3, 3 0, 4 0, 5 3]]))
 
 ;; we're going to fetch the tab from the web
-(def fast-car-html (slurp "http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm"))
-;(def fast-car-html (slurp "resources/fast_car_ver8_tab.htm"))
+;(def fast-car-html (slurp "http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm"))
+(def fast-car-html (slurp "resources/fast_car_ver8_tab.htm"))
 
 ;; ok, it's working, now save the tab
+;; NOTE: should use a CSS selector
 (def fast-car-tab
   (-> fast-car-html
       (.split "Tabbed by")
@@ -59,13 +58,11 @@
       (.split "hammer-on")
       first))
 
-;; first, filter out all lines that don't look like guitar lines
-;; use map-index because we need to keep ordering information
-(defn play-tab [guitar-tab]
-  (let [play! (partial guitar-pick-note-sequence 80)]
-    (play!
-     (tab/parse-guitar-tab guitar-tab))))
+(defn play-tab! [guitar-tab]
+  (guitar-pick-note-sequence 80 guitar-tab))
 
 (comment
-  (play-tab fast-car-tab))
+  (play-tab! (tab/parse-guitar-tab everybody-hurts))
+
+  (play-tab! (tab/parse-guitar-tab fast-car-tab)))
 
