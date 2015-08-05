@@ -52,13 +52,8 @@ E|---------------------------3-----------3-----------|
 ;(def fast-car-html (slurp "http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm"))
 (def fast-car-html (slurp "resources/fast_car_ver8_tab.htm"))
 
-;; NOTE: should use a CSS selector
 (def fast-car-tab
-  (-> fast-car-html
-      (.split "Tabbed by")
-      second
-      (.split "hammer-on")
-      first))
+  (tab/select-html fast-car-html))
 
 (defn play-tab! [guitar-tab]
   (guitar-pick-note-sequence 80 guitar-tab))

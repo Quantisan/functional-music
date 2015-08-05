@@ -1,6 +1,16 @@
 (ns functional-music.tab
   (:require [clojure.string :as s]))
 
+(defn select-html
+  "Select the tab block from HTML"
+  ;; NOTE: should use a CSS selector
+  [s]
+  (-> s
+      (.split "Tabbed by")
+      second
+      (.split "hammer-on")
+      first))
+
 (defn filter-tab-lines
   "Only keep the lines that are tabs. Assuming that tab lines must have a '-' and '|' characters."
   [coll]
