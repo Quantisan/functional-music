@@ -24,11 +24,17 @@
   (let [playguitar (partial guitar-pick (guitar))
         timeseq    (range (now) (+ (now) (* interval (count noteseq))) interval)]
     (doseq [[string-fret-seq timeval] (map vector noteseq timeseq)]
-      (doseq [[string fret] (partition 2 string-fret-seq)]
+      (doseq [[string fret] string-fret-seq]
         (playguitar string fret timeval)))))
 
 (def playguitar320
   (partial guitar-pick-note-sequence 320))  ;; 320ms delay between picked strings
+
+;; now we can play multiple notes at the same time
+(comment
+  (playguitar320 [[[0 3] [3 0] [4 0] [5 3]]]))
+
+
 
 (def everybody-hurts
 "
@@ -41,15 +47,10 @@ A|---------------------------------------------------|
 E|---------------------------3-----------3-----------|
 ")
 
-;; now we can play multiple notes at the same time
-(comment
-  (playguitar320 [[0 3, 3 0, 4 0, 5 3]]))
-
 ;; we're going to fetch the tab from the web
 ;(def fast-car-html (slurp "http://tabs.ultimate-guitar.com/t/tracy_chapman/fast_car_ver8_tab.htm"))
 (def fast-car-html (slurp "resources/fast_car_ver8_tab.htm"))
 
-;; ok, it's working, now save the tab
 ;; NOTE: should use a CSS selector
 (def fast-car-tab
   (-> fast-car-html

@@ -34,8 +34,7 @@
        (map-indexed vector)
        ;; coerce char to string then check with regex
        (filter #(re-seq #"[0-9]" (str (second %))))
-       (map to-string-fret)
-       (flatten)))
+       (map to-string-fret)))
 
 (defn parse-guitar-tab [s]
   (->> s
