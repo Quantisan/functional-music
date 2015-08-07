@@ -1,4 +1,4 @@
-(ns functional-music.core
+( ns functional-music.core
   (:require [functional-music.tab :as tab]
             [overtone.live :refer :all]
             [overtone.synth.stringed :refer :all]
@@ -21,10 +21,11 @@
    string-index-2 fret-index-2 ... ]]
    "
   [interval noteseq]
-  (let [timeseq  (range (now) (+ (now) (* interval (count noteseq))) interval)]
+  (let [playguitar (partial guitar-pick (guitar))  ;; curry the guitar instrument
+        timeseq    (range (now) (+ (now) (* interval (count noteseq))) interval)]
     (doseq [[string-fret-seq timeval] (map vector noteseq timeseq)]
       (doseq [[string fret] string-fret-seq]
-        (guitar-pick (guitar) string fret timeval)))))
+        (playguitar string fret timeval)))))
 
 (def playguitar320
   (partial guitar-pick-note-sequence 320))  ;; 320ms delay between picked strings
