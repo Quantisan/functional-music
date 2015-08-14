@@ -3,4 +3,4 @@
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
   :dependencies [[org.clojure/clojure "1.7.0"]
-                 [overtone "0.10-SNAPSHOT"]])
+                 [quantisan/overtone "0.10-SNAPSHOT"]])
