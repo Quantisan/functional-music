@@ -13,6 +13,7 @@
 
 (defn filter-tab-lines
   "Only keep the lines that are tabs. Assuming that tab lines must have a '-' and '|' characters."
+  ; hint: filter, defn, .contains, ->, ->>
   [coll]
   )
 
@@ -29,12 +30,14 @@
        (reduce join-tabs)))
 
 (defn remove-format [coll]
+  ; hint: map, s/replace, #
   )
 
 (defn to-string-fret [[s f]]
   [s (java.lang.Character/getNumericValue f)])
 
 (defn tab->string-fret [e B G D A E]
+  ; hint: map-indexed, vector, filter, re-seq, map
   )
 
 (defn parse-guitar-tab [s]
