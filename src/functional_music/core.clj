@@ -1,4 +1,4 @@
-( ns functional-music.core
+(ns functional-music.core
   (:require [functional-music.tab :as tab]
             [overtone.live :refer :all]
             [overtone.synth.stringed :refer :all]
@@ -56,11 +56,17 @@ E|---------------------------3-----------3-----------|
 (def fast-car-tab
   (tab/select-html fast-car-html))
 
+(def hello-tab (tab/select-html (slurp "http://tabs.ultimate-guitar.com/a/adele/hello_acoustic_tab.htm")))
+
 (defn play-tab! [guitar-tab]
   (guitar-pick-note-sequence 80 guitar-tab))
 
 (comment
   (play-tab! (tab/parse-guitar-tab everybody-hurts))
 
-  (play-tab! (tab/parse-guitar-tab fast-car-tab)))
+  (play-tab! (tab/parse-guitar-tab fast-car-tab))
+
+  (guitar-pick-note-sequence 160 (tab/parse-guitar-tab (slurp "resources/hello-chorus.txt")))
+
+  (guitar-pick-note-sequence 160 (tab/parse-guitar-tab hello-tab)))
 
