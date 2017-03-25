@@ -67,6 +67,11 @@ E|---------------------------3-----------3-----------|
   (play-tab! (tab/parse-guitar-tab fast-car-tab))
 
   (guitar-pick-note-sequence 160 (tab/parse-guitar-tab (slurp "resources/hello-chorus.txt")))
+  (guitar-pick-note-sequence 160 (tab/parse-guitar-tab hello-tab))
 
-  (guitar-pick-note-sequence 160 (tab/parse-guitar-tab hello-tab)))
+  (->> (slurp "resources/hotel_california_live_ver3_tab.htm")
+       (tab/select-html)
+       (tab/parse-guitar-tab)
+       (guitar-pick-note-sequence 120))
+  )
 
